@@ -65,11 +65,6 @@ export function MemoryGallery() {
                 {memory.caption}
               </span>
             </span>
-            {memory.isSample && (
-              <span className="mt-3 block text-center text-[8px] uppercase tracking-[0.2em] text-gold/55">
-                Sample · replace in loveContent.ts
-              </span>
-            )}
           </motion.button>
         ))}
       </div>
@@ -139,11 +134,6 @@ export function MemoryGallery() {
                   <ChevronRight size={19} />
                 </button>
               </div>
-              {memories[activeIndex].note && (
-                <p className="mt-7 text-center text-[10px] uppercase tracking-[0.18em] text-warmWhite/35">
-                  {memories[activeIndex].note}
-                </p>
-              )}
             </div>
             </motion.div>
           )}

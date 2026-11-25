@@ -9,6 +9,8 @@
  *         like "/images/our-first-date.jpg" below.
  * Planet photos are imported from `src/assets/` (img1–img4) and assigned to
  * the four planets below. Swap those files to change the planets.
+ * Memory photos are imported from `src/assets/` (img6–img11) and assigned to
+ * the six memory cards below. Swap those files to change the gallery.
  * Music:  `src/assets/music.mp3` is imported and used as `audioSrc`.
  *         See `public/audio/README.md` for alternatives.
  * --------------------------------------------------------------------------
@@ -18,6 +20,12 @@ import planetPhoto1 from "../assets/img1.jpeg";
 import planetPhoto2 from "../assets/img2.png";
 import planetPhoto3 from "../assets/img3.png";
 import planetPhoto4 from "../assets/img4.png";
+import memoryPhoto1 from "../assets/img6.png";
+import memoryPhoto2 from "../assets/img7.png";
+import memoryPhoto3 from "../assets/img8.png";
+import memoryPhoto4 from "../assets/img9.png";
+import memoryPhoto5 from "../assets/img10.png";
+import memoryPhoto6 from "../assets/img11.png";
 import musicUrl from "../assets/music.mp3";
 
 export type Memory = {
@@ -128,52 +136,40 @@ export const loveContent = {
   ] satisfies PlanetContent[],
 
   // ── Section 4: memories ─────────────────────────────────────────────────
-  // SAMPLE IMAGES: replace each `image` path with your own photograph.
+  // Personal photos imported from src/assets/ (img6–img11).
   memoriesHeading: "Our memories",
   memoriesIntro:
     "A few frames I never want to lose. Click a photograph to hold it a little closer.", // SAMPLE
   memories: [
     {
       id: "memory-1",
-      image: "/images/memory-1.svg",
+      image: memoryPhoto1,
       caption: "The kind of ordinary day you'd want to keep forever.", // SAMPLE
-      note: "Sample memory 01 — replace with your photo and caption.",
-      isSample: true,
     },
     {
       id: "memory-2",
-      image: "/images/memory-2.svg",
+      image: memoryPhoto2,
       caption: "Some conversations feel like they last a lifetime.", // SAMPLE
-      note: "Sample memory 02 — replace with your photo and caption.",
-      isSample: true,
     },
     {
       id: "memory-3",
-      image: "/images/memory-3.svg",
+      image: memoryPhoto3,
       caption: "A small moment that felt bigger than it looked.", // SAMPLE
-      note: "Sample memory 03 — replace with your photo and caption.",
-      isSample: true,
     },
     {
       id: "memory-4",
-      image: "/images/memory-4.svg",
+      image: memoryPhoto4,
       caption: "The way the light fell, and how you looked in it.", // SAMPLE
-      note: "Sample memory 04 — replace with your photo and caption.",
-      isSample: true,
     },
     {
       id: "memory-5",
-      image: "/images/memory-5.svg",
+      image: memoryPhoto5,
       caption: "A place I'll always picture when I think of you.", // SAMPLE
-      note: "Sample memory 05 — replace with your photo and caption.",
-      isSample: true,
     },
     {
       id: "memory-6",
-      image: "/images/memory-6.svg",
+      image: memoryPhoto6,
       caption: "One more frame in the story we're still writing.", // SAMPLE
-      note: "Sample memory 06 — replace with your photo and caption.",
-      isSample: true,
     },
   ] satisfies Memory[],
 
