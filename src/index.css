@@ -1,0 +1,401 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --midnight: #090b1a;
+  --violet-night: #17132e;
+  --lavender: #b9a5ff;
+  --blush: #f3a6c8;
+  --warm-white: #fff8f2;
+  --gold: #e8cb91;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--midnight);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--midnight);
+  color: var(--warm-white);
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body.modal-open,
+body.intro-locked {
+  overflow: hidden;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--lavender);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: rgba(243, 166, 200, 0.35);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0d20;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(185, 165, 255, 0.3);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(185, 165, 255, 0.5);
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-[10px] sm:text-[11px] uppercase tracking-[0.32em] text-gold/80 font-medium;
+  }
+
+  .serif-title {
+    @apply font-serif font-normal leading-[1.05] tracking-[-0.015em] text-warmWhite;
+  }
+
+  .soft-copy {
+    @apply text-warmWhite/65 leading-relaxed font-light;
+  }
+
+  .button-primary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full border border-lavender/35 px-7 py-3.5 text-[11px] uppercase tracking-[0.22em] font-medium text-warmWhite transition-all duration-500;
+    background: linear-gradient(135deg, rgba(185, 165, 255, 0.16), rgba(243, 166, 200, 0.09));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 10px 36px rgba(23, 19, 46, 0.45);
+  }
+  .button-primary:hover {
+    border-color: rgba(243, 166, 200, 0.65);
+    box-shadow: 0 0 0 1px rgba(243, 166, 200, 0.18), 0 14px 48px rgba(243, 166, 200, 0.18);
+    transform: translateY(-2px);
+  }
+
+  .button-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-warmWhite/15 px-5 py-2.5 text-[10px] uppercase tracking-[0.22em] text-warmWhite/70 transition-all duration-300;
+  }
+  .button-ghost:hover {
+    @apply border-lavender/45 text-warmWhite;
+    background: rgba(185, 165, 255, 0.08);
+  }
+
+  .section-shell {
+    @apply relative mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 py-24 sm:px-10 lg:px-16;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-lavender/25 to-transparent;
+  }
+}
+
+/* ── Starfield ─────────────────────────────────────────────────────────── */
+.star {
+  position: absolute;
+  border-radius: 9999px;
+  background: #fff8f2;
+  opacity: var(--opacity, 0.7);
+  animation: twinkle var(--duration, 5s) ease-in-out var(--delay, 0s) infinite alternate;
+  will-change: opacity, transform;
+}
+
+.star-gold {
+  background: var(--gold);
+}
+.star-lavender {
+  background: var(--lavender);
+}
+.star-blush {
+  background: var(--blush);
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: calc(var(--opacity, 0.7) * 0.28);
+    transform: scale(0.72);
+  }
+  100% {
+    opacity: var(--opacity, 0.7);
+    transform: scale(1.08);
+  }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 140px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 248, 242, 0.9));
+  transform: rotate(-32deg);
+  opacity: 0;
+  animation: shoot var(--duration, 9s) linear var(--delay, 0s) infinite;
+}
+.shooting-star::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 12px 3px rgba(255, 248, 242, 0.7);
+}
+
+@keyframes shoot {
+  0%,
+  68% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(-32deg) scaleX(0.2);
+  }
+  72% {
+    opacity: 0.9;
+  }
+  88% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-460px, 270px, 0) rotate(-32deg) scaleX(1);
+  }
+}
+
+.float-particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 248, 242, 0.85), transparent 70%);
+  animation: drift var(--duration, 18s) ease-in-out var(--delay, 0s) infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate3d(var(--drift-x, 24px), var(--drift-y, -48px), 0);
+    opacity: 0.18;
+  }
+}
+
+.crescent {
+  filter: drop-shadow(0 0 22px rgba(232, 203, 145, 0.24));
+}
+
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.glow-text {
+  text-shadow: 0 0 28px rgba(185, 165, 255, 0.32), 0 0 70px rgba(243, 166, 200, 0.12);
+}
+
+/* ── Universe ──────────────────────────────────────────────────────────── */
+.orbit-ring {
+  border: 1px solid rgba(185, 165, 255, 0.11);
+  border-radius: 50%;
+}
+
+.planet-halo {
+  box-shadow: 0 0 45px 12px var(--planet-glow);
+}
+
+.planet-photo {
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px var(--planet-ring),
+    0 0 22px 3px var(--planet-glow),
+    inset 0 0 18px rgba(9, 11, 26, 0.35);
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease;
+}
+.planet-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+.group:hover .planet-photo {
+  box-shadow:
+    0 0 0 1px var(--planet-ring-hover),
+    0 0 34px 8px var(--planet-glow-hover),
+    inset 0 0 18px rgba(9, 11, 26, 0.25);
+}
+
+.central-star {
+  background: radial-gradient(circle at 38% 34%, #fffdf7 0%, #ffe9bd 28%, var(--gold) 55%, #9d7440 100%);
+  box-shadow:
+    0 0 24px 5px rgba(232, 203, 145, 0.7),
+    0 0 85px 25px rgba(232, 203, 145, 0.22),
+    0 0 160px 60px rgba(243, 166, 200, 0.08);
+}
+
+/* ── Polaroids ─────────────────────────────────────────────────────────── */
+.polaroid {
+  background: #f6f0e8;
+  padding: 10px 10px 42px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 2px 0 rgba(255, 255, 255, 0.5) inset;
+}
+.polaroid img {
+  background: #17132e;
+}
+
+/* ── Envelopes ─────────────────────────────────────────────────────────── */
+.envelope {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.52;
+  background: linear-gradient(150deg, #f6e9d6, #e8d2b6);
+  border-radius: 7px;
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(255, 255, 255, 0.36);
+}
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 7px;
+  background: linear-gradient(150deg, #fbf2e6, #e9d7bd);
+  clip-path: polygon(0 0, 100% 0, 50% 62%);
+  transform-origin: top center;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 3px 10px rgba(72, 47, 25, 0.16);
+}
+.envelope-open .envelope-flap {
+  transform: rotateX(180deg);
+}
+.envelope-seal {
+  position: absolute;
+  z-index: 5;
+  top: 48%;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(140deg, var(--blush), #d47fa5);
+  color: #fff8f2;
+  font-size: 15px;
+  box-shadow: 0 4px 14px rgba(180, 82, 126, 0.4);
+  transition: opacity 0.3s ease, transform 0.5s ease;
+}
+.envelope-open .envelope-seal {
+  opacity: 0;
+  transform: scale(0.5) rotate(45deg);
+}
+.envelope-line {
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  background: linear-gradient(to bottom, transparent 49%, rgba(120, 83, 52, 0.16) 50%, transparent 51%);
+  pointer-events: none;
+}
+
+.paper-texture {
+  background-color: #fbf3e8;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(130, 94, 58, 0.07) 32px),
+    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.7), transparent 55%);
+}
+
+/* ── Modal ─────────────────────────────────────────────────────────────── */
+.modal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(185, 165, 255, 0.35) transparent;
+}
+
+/* ── Heart shape (finale) ──────────────────────────────────────────────── */
+.heart-halo {
+  filter: drop-shadow(0 0 12px rgba(243, 166, 200, 0.85)) drop-shadow(0 0 38px rgba(243, 166, 200, 0.4));
+}
+
+.final-heart-star {
+  filter: drop-shadow(0 0 4px rgba(255, 215, 230, 0.9));
+}
+
+/* ── Music control ─────────────────────────────────────────────────────── */
+.music-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5px;
+  height: 8px;
+}
+.music-bars span {
+  display: block;
+  width: 2px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--blush);
+  animation: music-bar 0.9s ease-in-out infinite alternate;
+}
+.music-bars span:nth-child(2) {
+  animation-delay: 0.25s;
+}
+.music-bars span:nth-child(3) {
+  animation-delay: 0.5s;
+}
+@keyframes music-bar {
+  from {
+    height: 2px;
+    opacity: 0.45;
+  }
+  to {
+    height: 8px;
+    opacity: 1;
+  }
+}
+
+/* ── Utility ───────────────────────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .shooting-star {
+    display: none;
+  }
+}
